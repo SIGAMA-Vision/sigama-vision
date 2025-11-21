@@ -4,7 +4,7 @@ import { NavLink } from "./NavLink";
 import { cn } from "@/lib/utils";
 
 const navigation = [
-  { name: "Monitor", href: "/", icon: Activity },
+  { name: "Monitor", href: "/monitoring", icon: Activity },
   { name: "Analytics", href: "/analytics", icon: BarChart3 },
   { name: "Alertas", href: "/anomalies", icon: AlertTriangle },
   { name: "Vaqueiro", href: "/vaqueiro", icon: LuFileText },

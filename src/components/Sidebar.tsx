@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./ThemeToggle";
 
 const navigation = [
-  { name: "Monitoramento", href: "/", icon: Activity },
+  { name: "Monitoramento", href: "/monitoring", icon: Activity },
   { name: "Dashboard Analítico", href: "/analytics", icon: BarChart3 },
   { name: "Anomalias", href: "/anomalies", icon: AlertTriangle },
   { name: "Vaqueiro Digital", href: "/vaqueiro", icon: LuFileText },

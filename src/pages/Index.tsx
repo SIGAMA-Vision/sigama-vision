@@ -1,7 +1,21 @@
 // Landing / Hero page for SIGAMA Vision
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Index = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // TODO: Atualmente aceitamos qualquer email/senha localmente para demonstrar o fluxo.
+    // Substituir por autenticação real (validação no backend, tokens seguros e tratamento de erros).
+    try {
+      localStorage.setItem("sigama_demo_auth", "true");
+    } catch (e) {
+      /* ignore */
+    }
+    navigate("/monitoring");
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
 
@@ -52,7 +66,7 @@ const Index = () => {
           <aside className="flex flex-col items-center w-full mt-4 md:mt-0">
             <div className="w-full bg-muted rounded-lg overflow-hidden shadow p-4 md:p-6">
               <h3 className="text-lg font-semibold mb-4">Acesse sua conta</h3>
-              <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-3">
+              <form onSubmit={handleLogin} className="flex flex-col gap-3">
                 <label className="text-sm">Email</label>
                 <input type="email" name="email" required className="w-full rounded-md border px-3 py-2 bg-background" />
 

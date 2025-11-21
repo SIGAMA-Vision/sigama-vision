@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "./components/ThemeProvider";
 import Onboarding from "./components/Onboarding";
 import Layout from "./components/Layout";
@@ -27,9 +27,10 @@ const App = () => (
           <Onboarding />
           <Layout>
             <Routes>
-              <Route path="/" element={<Monitoring />} />
-              {/* Landing page (accessible during demos/pitch at /landing) */}
+              <Route path="/" element={<Navigate to="/landing" replace />} />
+              {/* Landing page */}
               <Route path="/landing" element={<Index />} />
+              <Route path="/monitoring" element={<Monitoring />} />
               <Route path="/register" element={<Register />} />
               <Route path="/register/form" element={<Register />} />
               <Route path="/analytics" element={<Analytics />} />

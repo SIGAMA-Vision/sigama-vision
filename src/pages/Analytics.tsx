@@ -61,9 +61,37 @@ const Analytics = () => {
 
       {/* Emissões Mensais */}
       <Card className="p-6">
-        <div className="flex items-center gap-3 mb-4">
-          <TrendingUp className="w-5 h-5 text-primary" />
-          <h3 className="text-lg font-semibold text-foreground">Tendência de Emissões (2024)</h3>
+        {/* header + IA prediction */}
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <TrendingUp className="w-5 h-5 text-primary" />
+            <h3 className="text-lg font-semibold text-foreground">Tendência de Emissões (2024)</h3>
+          </div>
+          {/* IA prediction: compute from mockData and display colored text */}
+          <div>
+            {(() => {
+              // TODO: substituir por previsão real da IA (chamada a serviço/model).
+              // compute simple prediction based on last two months in mockData
+              const months = monthlyEmissions.map((m) => m.month);
+              const lastIndex = monthlyEmissions.length - 1;
+              const prevIndex = Math.max(0, lastIndex - 1);
+              const prev = monthlyEmissions[prevIndex]?.gtas ?? 0;
+              const last = monthlyEmissions[lastIndex]?.gtas ?? 0;
+              const pct = prev > 0 ? ((last - prev) / prev) * 100 : 0;
+              const direction = pct >= 0 ? "aumento" : "queda";
+              const pctStr = Math.abs(pct).toFixed(1);
+              const monthOrder = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+              const currentMonth = monthlyEmissions[lastIndex]?.month;
+              const nextMonth = monthOrder[monthOrder.indexOf(currentMonth) + 1] ?? "mês seguinte";
+              const colorClass = pct >= 0 ? "text-success" : "text-destructive";
+
+              return (
+                <div className={`text-sm font-medium ${colorClass}`}>
+                  A IA prevê {direction} de {pctStr}% para {nextMonth}
+                </div>
+              );
+            })()}
+          </div>
         </div>
         <ResponsiveContainer width="100%" height={350}>
           <LineChart data={monthlyEmissions}>
