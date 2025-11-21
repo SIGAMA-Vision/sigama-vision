@@ -1,4 +1,5 @@
-import { BarChart3, Activity, AlertTriangle, FileText, Settings } from "lucide-react";
+import { BarChart3, Activity, AlertTriangle, Settings } from "lucide-react";
+import { LuFileText } from "react-icons/lu";
 import { NavLink } from "./NavLink";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./ThemeToggle";
@@ -7,7 +8,7 @@ const navigation = [
   { name: "Monitoramento", href: "/", icon: Activity },
   { name: "Dashboard Analítico", href: "/analytics", icon: BarChart3 },
   { name: "Anomalias", href: "/anomalies", icon: AlertTriangle },
-  { name: "Vaqueiro Digital", href: "/vaqueiro", icon: FileText },
+  { name: "Vaqueiro Digital", href: "/vaqueiro", icon: LuFileText },
   { name: "Configurações", href: "/settings", icon: Settings },
 ];
 
@@ -19,8 +20,8 @@ const Sidebar = () => {
         <div className="p-6 border-b border-border">
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary-light flex items-center justify-center">
-                <Activity className="w-6 h-6 text-primary-foreground" />
+              <div className="w-10 h-10">
+                <img src="/logos/sigama_small_logo.png" alt="SIGAMA" className="w-10 h-10 object-contain" />
               </div>
               <div>
                 <h1 className="text-lg font-bold text-foreground">SIGAMA Vision</h1>

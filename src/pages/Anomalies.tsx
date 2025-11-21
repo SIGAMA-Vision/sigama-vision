@@ -1,4 +1,5 @@
 import { AlertTriangle, TrendingDown, TrendingUp, Search } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -15,6 +16,24 @@ import {
 } from "recharts";
 
 const Anomalies = () => {
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [yAxisWidth, setYAxisWidth] = useState<number>(180);
+  const [chartHeight, setChartHeight] = useState<number>(350);
+
+  useEffect(() => {
+    function onResize() {
+      const mobile = typeof window !== "undefined" && window.innerWidth < 640;
+      setIsMobile(mobile);
+      setYAxisWidth(mobile ? 120 : 180);
+      setChartHeight(mobile ? 300 : 350);
+    }
+
+    // initial check
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -63,17 +82,18 @@ const Anomalies = () => {
       </div>
 
       {/* Gráfico de Anomalias */}
-      <Card className="p-6">
+      <Card className="p-6 overflow-hidden">
         <h3 className="text-lg font-semibold text-foreground mb-4">Distribuição de Anomalias por Tipo</h3>
-        <ResponsiveContainer width="100%" height={350}>
+        {/* Adjust chart sizing for small screens to avoid horizontal overflow */}
+        <ResponsiveContainer width="100%" height={chartHeight}>
           <BarChart data={anomalyTypes} layout="vertical">
             <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
             <XAxis type="number" tick={{ fill: "hsl(var(--muted-foreground))" }} />
             <YAxis
               type="category"
               dataKey="type"
-              tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 12 }}
-              width={180}
+              tick={{ fill: "hsl(var(--muted-foreground))", fontSize: isMobile ? 11 : 12 }}
+              width={yAxisWidth}
             />
             <Tooltip
               contentStyle={{
@@ -122,7 +142,7 @@ const Anomalies = () => {
             return (
               <div
                 key={alert.id}
-                className="flex items-start gap-4 p-4 rounded-lg border border-border hover:bg-muted/50 transition-colors"
+                className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 rounded-lg border border-border hover:bg-muted/50 transition-colors"
               >
                 <div className="flex items-center gap-2">
                   <Badge variant="outline" className={severityColors[alert.severity]}>
@@ -132,7 +152,7 @@ const Anomalies = () => {
                     {typeLabels[alert.type]}
                   </Badge>
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-foreground mb-1">{alert.message}</p>
                   <div className="flex items-center gap-4 text-xs text-muted-foreground">
                     <span>{alert.location}</span>
@@ -140,7 +160,7 @@ const Anomalies = () => {
                     <span>{alert.timestamp}</span>
                   </div>
                 </div>
-                <button className="text-sm font-medium text-primary hover:underline">
+                <button className="text-sm font-medium text-primary hover:underline mt-2 sm:mt-0 sm:ml-auto whitespace-nowrap">
                   Investigar
                 </button>
               </div>

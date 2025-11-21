@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Activity, TrendingUp, Clock, DollarSign, CheckCircle2, MapPin } from "lucide-react";
 import KPICard from "@/components/KPICard";
 import { Card } from "@/components/ui/card";
@@ -18,6 +19,7 @@ import {
 
 const Monitoring = () => {
   const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
   useEffect(() => {
     // Simula carregamento de dados
@@ -61,10 +63,14 @@ const Monitoring = () => {
           <h1 className="text-3xl font-bold text-foreground mb-2">Monitoramento de GTAs</h1>
           <p className="text-muted-foreground">Visão em tempo real do sistema SIGAMA</p>
         </div>
-        <Badge variant="outline" className="bg-success/10 text-success border-success/20 px-4 py-2">
+        <div className="flex items-center gap-3">
+          <Badge variant="outline" className="bg-success/10 text-success border-success/20 px-4 py-2">
           <div className="w-2 h-2 rounded-full bg-success animate-pulse mr-2" />
           Sistema Ativo
-        </Badge>
+          </Badge>
+
+          {/* Logout moved to Perfil do Usuário (Settings) */}
+        </div>
       </div>
 
       {/* KPI Cards */}

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Upload, FileText, CheckCircle2, AlertCircle, Sparkles } from "lucide-react";
+import { Upload, CheckCircle2, AlertCircle } from "lucide-react";
+import { LuBrain, LuFileText } from "react-icons/lu";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -64,8 +65,8 @@ const Vaqueiro = () => {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-3">
-        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-accent to-warning flex items-center justify-center">
-          <Sparkles className="w-6 h-6 text-accent-foreground" />
+        <div className="w-12 h-12 rounded-lg bg-[#E8EDEB] flex items-center justify-center">
+          <LuBrain className="w-6 h-6 text-accent-foreground" />
         </div>
         <div>
           <h1 className="text-3xl font-bold text-foreground">Vaqueiro Digital</h1>
@@ -146,7 +147,7 @@ const Vaqueiro = () => {
           {/* Dados Extraídos */}
           <Card className="p-6">
             <div className="flex items-center gap-2 mb-4">
-              <FileText className="w-5 h-5 text-primary" />
+              <LuFileText className="w-5 h-5 text-primary" />
               <h3 className="text-lg font-semibold text-foreground">Dados Extraídos</h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

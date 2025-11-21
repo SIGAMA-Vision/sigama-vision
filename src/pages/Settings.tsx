@@ -1,10 +1,23 @@
 import { Settings as SettingsIcon, User, Bell, Shield, Database } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 
 const Settings = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    try {
+      localStorage.clear();
+      sessionStorage.clear();
+    } catch (e) {
+      /* ignore */
+    }
+    navigate("/landing");
+  };
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -32,7 +45,16 @@ const Settings = () => {
             <Label className="text-sm text-muted-foreground">Nível de Acesso</Label>
             <p className="text-foreground font-medium">Gestor/Coordenador - Visão Estadual</p>
           </div>
-          <Button variant="outline">Editar Perfil</Button>
+          <div className="flex items-center justify-between w-full">
+            <div>
+              <Button variant="outline">Editar Perfil</Button>
+            </div>
+            <div>
+              <Button variant="outline" onClick={handleLogout} className="text-destructive">
+                Sair
+              </Button>
+            </div>
+          </div>
         </div>
       </Card>
 

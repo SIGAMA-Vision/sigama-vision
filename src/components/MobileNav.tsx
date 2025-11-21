@@ -1,4 +1,5 @@
-import { Activity, BarChart3, AlertTriangle, FileText, Settings } from "lucide-react";
+import { Activity, BarChart3, AlertTriangle, Settings } from "lucide-react";
+import { LuFileText } from "react-icons/lu";
 import { NavLink } from "./NavLink";
 import { cn } from "@/lib/utils";
 
@@ -6,7 +7,7 @@ const navigation = [
   { name: "Monitor", href: "/", icon: Activity },
   { name: "Analytics", href: "/analytics", icon: BarChart3 },
   { name: "Alertas", href: "/anomalies", icon: AlertTriangle },
-  { name: "Vaqueiro", href: "/vaqueiro", icon: FileText },
+  { name: "Vaqueiro", href: "/vaqueiro", icon: LuFileText },
   { name: "Config", href: "/settings", icon: Settings },
 ];
 

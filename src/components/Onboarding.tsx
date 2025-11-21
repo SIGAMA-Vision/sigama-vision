@@ -85,9 +85,12 @@ const Onboarding = () => {
       <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
           <div className="flex items-center justify-between">
-            <DialogTitle className="text-2xl font-bold text-foreground">
-              {steps[currentStep].title}
-            </DialogTitle>
+            <div className="flex items-center gap-4">
+              <img src="/logos/sigama_big_logo.png" alt="SIGAMA" className="h-10 hidden sm:block" />
+              <DialogTitle className="text-2xl font-bold text-foreground">
+                {steps[currentStep].title}
+              </DialogTitle>
+            </div>
             <Button
               variant="ghost"
               size="icon"

@@ -11,7 +11,9 @@ import Analytics from "./pages/Analytics";
 import Anomalies from "./pages/Anomalies";
 import Vaqueiro from "./pages/Vaqueiro";
 import Settings from "./pages/Settings";
+import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
+import Index from "./pages/Index";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +28,10 @@ const App = () => (
           <Layout>
             <Routes>
               <Route path="/" element={<Monitoring />} />
+              {/* Landing page (accessible during demos/pitch at /landing) */}
+              <Route path="/landing" element={<Index />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/register/form" element={<Register />} />
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/anomalies" element={<Anomalies />} />
               <Route path="/vaqueiro" element={<Vaqueiro />} />
