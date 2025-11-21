@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
 import { BarChart3, TrendingUp, PieChart as PieChartIcon } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import ChartSkeleton from "@/components/ChartSkeleton";
 import { monthlyEmissions, speciesDistribution, processingTimes } from "@/lib/mockData";
 import {
   LineChart,
@@ -18,6 +20,13 @@ import {
 } from "recharts";
 
 const Analytics = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1800);
+    return () => clearTimeout(timer);
+  }, []);
+
   const COLORS = [
     "hsl(var(--primary))",
     "hsl(var(--secondary))",
@@ -25,6 +34,22 @@ const Analytics = () => {
     "hsl(var(--success))",
     "hsl(var(--warning))",
   ];
+
+  if (loading) {
+    return (
+      <div className="space-y-6">
+        <div className="space-y-2">
+          <div className="h-8 w-64 bg-muted rounded animate-pulse" />
+          <div className="h-4 w-96 bg-muted rounded animate-pulse" />
+        </div>
+        <ChartSkeleton title="Tendência de Emissões" height={350} />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <ChartSkeleton title="Distribuição por Espécie" height={300} />
+          <ChartSkeleton title="Tempo de Processamento" height={300} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
