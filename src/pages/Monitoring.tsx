@@ -1,7 +1,9 @@
+import { useState, useEffect } from "react";
 import { Activity, TrendingUp, Clock, DollarSign, CheckCircle2, MapPin } from "lucide-react";
 import KPICard from "@/components/KPICard";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import ChartSkeleton from "@/components/ChartSkeleton";
 import { gtaStats, recentAlerts, heatMapData, regionalUnits } from "@/lib/mockData";
 import {
   BarChart,
@@ -15,6 +17,42 @@ import {
 } from "recharts";
 
 const Monitoring = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simula carregamento de dados
+    const timer = setTimeout(() => setLoading(false), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div className="space-y-2">
+            <div className="h-8 w-64 bg-muted rounded animate-pulse" />
+            <div className="h-4 w-48 bg-muted rounded animate-pulse" />
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[1, 2, 3, 4].map((i) => (
+            <Card key={i} className="p-6 animate-pulse">
+              <div className="space-y-3">
+                <div className="h-4 w-24 bg-muted rounded" />
+                <div className="h-8 w-32 bg-muted rounded" />
+                <div className="h-3 w-20 bg-muted rounded" />
+              </div>
+            </Card>
+          ))}
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <ChartSkeleton title="Densidade por Região" height={300} />
+          <ChartSkeleton title="Performance Regional" height={300} />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       {/* Header */}

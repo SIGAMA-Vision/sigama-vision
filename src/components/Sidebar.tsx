@@ -1,6 +1,7 @@
 import { BarChart3, Activity, AlertTriangle, FileText, Settings } from "lucide-react";
 import { NavLink } from "./NavLink";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "./ThemeToggle";
 
 const navigation = [
   { name: "Monitoramento", href: "/", icon: Activity },
@@ -16,14 +17,17 @@ const Sidebar = () => {
       <div className="flex flex-col h-full">
         {/* Logo */}
         <div className="p-6 border-b border-border">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary-light flex items-center justify-center">
-              <Activity className="w-6 h-6 text-primary-foreground" />
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary-light flex items-center justify-center">
+                <Activity className="w-6 h-6 text-primary-foreground" />
+              </div>
+              <div>
+                <h1 className="text-lg font-bold text-foreground">SIGAMA Vision</h1>
+                <p className="text-xs text-muted-foreground">Sistema de Monitoramento</p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-lg font-bold text-foreground">SIGAMA Vision</h1>
-              <p className="text-xs text-muted-foreground">Sistema de Monitoramento</p>
-            </div>
+            <ThemeToggle />
           </div>
         </div>
 
